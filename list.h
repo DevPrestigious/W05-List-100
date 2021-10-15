@@ -15,7 +15,7 @@
  *        List         : A class that represents a List
  *        ListIterator : An iterator through List
  * Author
- *    Alexander Dohms, Stephen Costigan
+ *    Alexander Dohms, Stephen Costigan, Shaun Crook
  ************************************************************************/
 
 #pragma once
@@ -77,7 +77,7 @@ public:
 
    //
    // Insert
-   //
+   //Test
 
    void push_front(const T&  data);
    void push_front(      T&& data);
