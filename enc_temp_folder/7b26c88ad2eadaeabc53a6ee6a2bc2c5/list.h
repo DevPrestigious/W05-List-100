@@ -343,8 +343,6 @@ list <T> ::list(const std::initializer_list<T>& il)
 template <typename T>
 list <T> ::list(size_t num)
 {
-    // THIS IS LIKELY THE SAME AS THE FILL CONSTRUCTOR, BUT WITH NULL VALUES. 
-    // When we get that figured out, let's just copy it here.
     /*numElements = num;
     if (num == 0) {
         pHead = pTail = nullptr;
@@ -361,8 +359,8 @@ template <typename T>
 list <T> ::list()
 {
     // Doesn't contribute to %, but it matches the book so idk
-    /*numElements = 0;
-    pHead = pTail = nullptr;*/
+    numElements = 0;
+    pHead = pTail = nullptr;
 }
 
 /*****************************************
@@ -371,10 +369,11 @@ list <T> ::list()
 template <typename T>
 list <T> ::list(list& rhs)
 {
-    // Doesn't contribute to %, but it matches the book so idk
-    /*pHead = pTail = nullptr;
+    pHead = pTail = nullptr;
     numElements = 0;
-    *this = rhs;*/
+    for (list<T>::iterator it = rhs.begin(); it != rhs.end(); ++it)
+        push_back(*it);
+    /**this = rhs;*/
 }
 
 /*****************************************
@@ -394,16 +393,16 @@ list <T> ::list(list <T>&& rhs)
 }
 
 /**********************************************
- * LIST :: assignment operator
+ * LIST :: assignment operator - MOVE - Finished | Alexander
  * Copy one list onto another
- *     INPUT  : a list to be copied
+ *     INPUT  : a list to be moved
  *     OUTPUT :
- *     COST   : O(n) with respect to the number of nodes
+ *     COST   : O(n) with respect to the size of the LHS
  *********************************************/
 template <typename T>
-list <T>& list <T> :: operator = (list <T>& rhs)
+list <T>& list <T> :: operator = (list <T> && rhs)
 {
-    clear();
+    /*clear();
 
     for (int i = 0; i < numElements; i++) {
         if (i == 0) {
@@ -421,39 +420,20 @@ list <T>& list <T> :: operator = (list <T>& rhs)
     rhs.pHead = pTail = NULL;
     rhs.numElements = 0;
 
-    return *this;
-    /*return *this;*/
+    return *this;*/
 }
 
 /**********************************************
- * LIST :: assignment operator - MOVE - Alexander
+ * LIST :: assignment operator
  * Copy one list onto another
- *     INPUT  : a list to be moved
+ *     INPUT  : a list to be copied
  *     OUTPUT :
- *     COST   : O(n) with respect to the size of the LHS
+ *     COST   : O(n) with respect to the number of nodes
  *********************************************/
 template <typename T>
-list <T>& list <T> :: operator = (list <T> && rhs)
+list <T> & list <T> :: operator = (list <T> & rhs)
 {
-    //clear();
-
-    /*for (int i = 0; i < numElements; i++) {
-        if (i == 0) {
-            pHead = rhs.pHead;
-        }
-        else {
-            pHead = pHead->pNext;
-            rhs.pHead = rhs.pHead->pNext;
-            pHead[i] = rhs.pHead[i];
-        }
-    }*/
-
-
-    /*numElements = rhs.numElements;
-    rhs.pHead = pTail = NULL;
-    rhs.numElements = 0;*/
-
-    return *this;
+   return *this;
 }
 
 /**********************************************
@@ -667,7 +647,6 @@ void list <T> ::push_front(T && data)
 template <typename T>
 void list <T> ::pop_back()
 {
-    // This hurts our %
    /*if (!empty())
     {
         if (numElements == 1 || numElements == NULL) {

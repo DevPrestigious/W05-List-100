@@ -394,6 +394,37 @@ list <T> ::list(list <T>&& rhs)
 }
 
 /**********************************************
+ * LIST :: assignment operator - MOVE - Finished | Alexander
+ * Copy one list onto another
+ *     INPUT  : a list to be moved
+ *     OUTPUT :
+ *     COST   : O(n) with respect to the size of the LHS
+ *********************************************/
+template <typename T>
+list <T>& list <T> :: operator = (list <T> && rhs)
+{
+    /*clear();
+
+    for (int i = 0; i < numElements; i++) {
+        if (i == 0) {
+            pHead = rhs.pHead;
+        }
+        else {
+            pHead = pHead->pNext;
+            rhs.pHead = rhs.pHead->pNext;
+            pHead[i] = rhs.pHead[i];
+        }
+    }
+
+
+    numElements = rhs.numElements;
+    rhs.pHead = pTail = NULL;
+    rhs.numElements = 0;
+
+    return *this;*/
+}
+
+/**********************************************
  * LIST :: assignment operator
  * Copy one list onto another
  *     INPUT  : a list to be copied
@@ -401,7 +432,7 @@ list <T> ::list(list <T>&& rhs)
  *     COST   : O(n) with respect to the number of nodes
  *********************************************/
 template <typename T>
-list <T>& list <T> :: operator = (list <T>& rhs)
+list <T> & list <T> :: operator = (list <T> & rhs)
 {
     clear();
 
@@ -422,38 +453,7 @@ list <T>& list <T> :: operator = (list <T>& rhs)
     rhs.numElements = 0;
 
     return *this;
-    /*return *this;*/
-}
-
-/**********************************************
- * LIST :: assignment operator - MOVE - Alexander
- * Copy one list onto another
- *     INPUT  : a list to be moved
- *     OUTPUT :
- *     COST   : O(n) with respect to the size of the LHS
- *********************************************/
-template <typename T>
-list <T>& list <T> :: operator = (list <T> && rhs)
-{
-    //clear();
-
-    /*for (int i = 0; i < numElements; i++) {
-        if (i == 0) {
-            pHead = rhs.pHead;
-        }
-        else {
-            pHead = pHead->pNext;
-            rhs.pHead = rhs.pHead->pNext;
-            pHead[i] = rhs.pHead[i];
-        }
-    }*/
-
-
-    /*numElements = rhs.numElements;
-    rhs.pHead = pTail = NULL;
-    rhs.numElements = 0;*/
-
-    return *this;
+   /*return *this;*/
 }
 
 /**********************************************
@@ -679,6 +679,11 @@ void list <T> ::pop_back()
         numElements--;
 
     }*/
+    if (!empty())
+    {
+        pTail->pPrev = pTail;
+        numElements--;
+    }
 }
 
 /*********************************************
