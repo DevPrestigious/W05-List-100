@@ -256,7 +256,6 @@ list <T> ::list(size_t num, const T & t)
     //        /*std::cout << pNew->data << std::endl;
     //        pNew = new Node(t);
     //        pNew->pPrev = pPrevious;
-
     //        pNew->pPrev->pNext = pNew;
     //        pPrevious = pNew;*/
     //    }
@@ -359,6 +358,7 @@ list <T> ::list(size_t num)
 template <typename T>
 list <T> ::list()
 {
+    // Doesn't contribute to %, but it matches the book so idk
     /*numElements = 0;
     pHead = pTail = nullptr;*/
 }
@@ -369,6 +369,7 @@ list <T> ::list()
 template <typename T>
 list <T> ::list(list& rhs)
 {
+    // Doesn't contribute to %, but it matches the book so idk
     /*pHead = pTail = nullptr;
     numElements = 0;
     *this = rhs;*/
