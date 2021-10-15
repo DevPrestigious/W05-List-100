@@ -100,7 +100,7 @@ public:
    //
 
    bool empty()  const { return size() == 0; }
-   size_t size() const { return numElements > 0 ? numElements : 0; }
+   size_t size() const { return numElements; }
 
 
 #ifdef DEBUG // make this visible to the unit tests
