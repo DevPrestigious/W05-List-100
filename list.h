@@ -63,10 +63,10 @@ public:
    // Iterator
    //
 
-   class  iterator;
-   iterator begin()  { return iterator(); }
-   iterator rbegin() { return iterator(); }
-   iterator end()    { return iterator(); }
+   class iterator;
+   iterator begin() { return iterator(pHead); }
+   iterator rbegin() { return iterator(pTail); }
+   iterator end() { return iterator(nullptr); }
 
    //
    // Access
@@ -84,7 +84,7 @@ public:
    void push_back (const T&  data);
    void push_back (      T&& data);
    iterator insert(iterator it, const T& data);
-   iterator insert(iterator it, T&& data);
+   iterator insert(iterator it, T&& data); 
 
    //
    // Remove
@@ -99,8 +99,8 @@ public:
    // Status
    //
 
-   bool empty()  const { return true; }
-   size_t size() const { return 99;   }
+   bool empty()  const { return numElements; }
+   size_t size() const { return numElements > 0 ? numElements : 0; }
 
 
 #ifdef DEBUG // make this visible to the unit tests
@@ -281,9 +281,9 @@ list <T> ::list(const std::initializer_list<T>& il)
     numElements = il.size();
     pHead = pTail = new list <T> ::Node();
     for (T const item : il)
-       {
-           push_back(item);
-       }
+    {
+        push_back(item);
+    }
 }
 
 /*****************************************
@@ -438,7 +438,7 @@ void list <T> :: clear()
 template <typename T>
 void list <T> :: push_back(const T & data)
 {
-    
+
 }
 
 template <typename T>
