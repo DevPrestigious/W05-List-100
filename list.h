@@ -295,7 +295,12 @@ template <typename T>
 list <T> ::list(size_t num)
 {
    numElements = num;
-   pHead = pTail = new list <T> ::Node();
+   if (num == 0) {
+       pHead = pTail = nullptr;
+   }
+   else {
+       pHead = pTail = new list <T> ::Node();
+   }
 }
 
 /*****************************************
