@@ -256,16 +256,18 @@ list <T> ::list(size_t num, const T & t)
  ****************************************/
 template <typename T>
 template <class Iterator>
-list <T> ::list(Iterator first, Iterator last) // [ x, y, z ]
+list <T> ::list(Iterator first, Iterator last) 
 {
     pHead = pTail = nullptr;
+    numElements = 0;
+    auto it = first;
 
-    list*<T>::iterator it = first;
-    while (it != last)
-       {
-           push_back(*it);
-           numElements++;
-       }
+    while (it != last) 
+    {
+        push_back(*it);
+        numElements++;
+        it++;
+    }
 }
 
 /*****************************************
