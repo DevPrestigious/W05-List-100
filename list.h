@@ -542,23 +542,17 @@ template <typename T>
 void list <T> :: clear()
 {
 
-    //if (numElements > 0) {
-    //    while (pHead != nullptr)
-    //    {
-    //        Node* pDelete = pHead;
-    //        pHead = pHead->pNext;
-    //        delete pDelete;
-    //    }
-    //}
-    //// Set list default values
-    //pHead = pTail = NULL;
-    //numElements = 0;
-
-        
-        // Set list default values
-        pHead = pTail = nullptr;
-        numElements = 0;
-
+    /*if (numElements > 0) {
+        while (pHead != nullptr)
+        {
+            Node* pDelete = pHead;
+            pHead = pHead->pNext;
+            delete pDelete;
+        }
+    }*/
+    // Set list default values
+    pHead = pTail = nullptr;
+    numElements = 0;
 }
 
 /*********************************************
