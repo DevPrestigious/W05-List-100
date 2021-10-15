@@ -161,57 +161,56 @@ template <typename T>
 class list <T> :: iterator
 {
 public:
-   // constructors, destructors, and assignment operator
-   iterator() 
-   {
-      p = new typename list <T> ::Node;
-   }
-   iterator(Node * p) 
-   {
-      p = new typename list <T> ::Node;
-   }
-   iterator(const iterator  & rhs) 
-   {
-      p = new typename list <T> ::Node;
-   }
-   iterator & operator = (const iterator & rhs)
-   {
-      return *this;
-   }
-   
-   // equals, not equals operator
-   bool operator == (const iterator & rhs) const { return true; }
-   bool operator != (const iterator & rhs) const { return true; }
+    iterator() { p = nullptr; }
+    iterator(Node* pRHS) { p = pRHS; }
+    iterator(const iterator& rhs) { p = rhs.p; }
+    iterator& operator = (const iterator& rhs)
+    {
+        this->p = rhs.p;
+        return *this;
+    }
 
-   // dereference operator, fetch a node
-   T & operator * ()
-   {
-      return *(new T);
-   }
+    // equals, not equals operator
+    bool operator != (const iterator& rhs) const { return (rhs.p != p ? true : false); }
+    bool operator == (const iterator& rhs) const { return (rhs.p == p ? true : false); }
 
-   // postfix increment
-   iterator operator ++ (int postfix)
-   {
-      return *this;
-   }
+    // dereference operator, fetch a node
+    T& operator * ()
+    {
+        return p->data;
+    }
 
-   // prefix increment
-   iterator & operator ++ ()
-   {
-      return *this;
-   }
-   
-   // postfix decrement
-   iterator operator -- (int postfix)
-   {
-      return *this;
-   }
+    // postfix increment
+    iterator operator ++ (int postfix)
+    {
+        iterator i = p;
+        p++;
+        return i;
+    }
 
-   // prefix decrement
-   iterator & operator -- ()
-   {
-      return *this;
-   } 
+    // prefix increment
+    iterator& operator ++ ()
+    {
+        p++;
+        return *this;
+    }
+
+    // postfix decrement
+    iterator operator -- (int postfix)
+    {
+        iterator i = p;
+        if (p > 0)
+            p--;
+        return i;
+    }
+
+    // prefix decrement 
+    iterator& operator -- ()
+    {
+        if (p > 0)
+            p--;
+        return *this;
+    }
 
    // two friends who need to access p directly
    friend iterator list <T> :: insert(iterator it, const T &  data);
