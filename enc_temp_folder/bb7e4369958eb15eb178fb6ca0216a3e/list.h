@@ -623,7 +623,7 @@ void list <T> :: push_front(const T & data)
 template <typename T>
 void list <T> ::push_front(T && data)
 {
-
+    push_front(std::move(data));
 }
 
 
@@ -637,8 +637,9 @@ void list <T> ::push_front(T && data)
 template <typename T>
 void list <T> ::pop_back()
 {
+    // This hurts our %
    /*if (!empty())
-   {
+    {
         if (numElements == 1 || numElements == NULL) {
             pTail = pHead = nullptr;
         }
@@ -646,7 +647,8 @@ void list <T> ::pop_back()
             pTail->pPrev = pTail;
         }
         numElements--;
-   }*/
+
+    }*/
 }
 
 /*********************************************
