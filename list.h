@@ -39,7 +39,7 @@ public:
    // Construct
    //
 
-    
+   list();
    list(list <T> & rhs);
    list(list <T>&& rhs);
    list(size_t num, const T & t);
@@ -273,38 +273,44 @@ list <T> ::list(size_t num)
 }
 
 /*****************************************
- * LIST :: DEFAULT constructors
+ * LIST :: DEFAULT constructors - Finished | Alexander
  ****************************************/
 template <typename T>
 list <T> ::list() 
 {
-   numElements = 99;
-   pHead = pTail = new list <T> ::Node();
+    numElements = 0;
+    pHead = pTail = nullptr;
 }
 
 /*****************************************
- * LIST :: COPY constructors
+ * LIST :: COPY constructors - Finished | Alexander
  ****************************************/
 template <typename T>
 list <T> ::list(list& rhs) 
 {
-   numElements = 99;
-   pHead = pTail = new list <T> ::Node();
+    pHead = pTail = nullptr;
+    numElements = 0;
+    *this = rhs;
 }
 
 /*****************************************
- * LIST :: MOVE constructors
+ * LIST :: MOVE constructors - Finished | Alexander
  * Steal the values from the RHS
  ****************************************/
 template <typename T>
 list <T> ::list(list <T>&& rhs)
 {
-   numElements = 99;
-   pHead = pTail = new list <T> ::Node();
+    pHead = rhs.pHead;
+    pTail = rhs.pTail;
+    numElements = rhs.numElements;
+    
+    rhs.pHead = nullptr;
+    rhs.pTail = nullptr;
+    rhs.numElements = 0;
 }
 
 /**********************************************
- * LIST :: assignment operator - MOVE
+ * LIST :: assignment operator - MOVE - Finished | Alexander
  * Copy one list onto another
  *     INPUT  : a list to be moved
  *     OUTPUT :
@@ -313,7 +319,8 @@ list <T> ::list(list <T>&& rhs)
 template <typename T>
 list <T>& list <T> :: operator = (list <T> && rhs)
 {
-   return *this;
+    clear();
+    swap(rhs);
 }
 
 /**********************************************
@@ -491,6 +498,18 @@ typename list <T> :: iterator list <T> :: insert(list <T> :: iterator it,
 template <typename T>
 void swap(list <T> & lhs, list <T> & rhs)
 {
+
+    /*list.swap(rhs)
+         tempHead <- rhs.pHead
+         rhs.pHead <- pHead
+         pHead <- tempHead
+         tempTail <- rhs.pTail
+         rhs.pTail <- pTail
+         pTail <- tempTail
+         tempElements <- rhs.numElements
+         rhs.numElements <- numElements
+         numElements <- tempElements
+        */
 
 }
 
