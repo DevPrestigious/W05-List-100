@@ -233,6 +233,19 @@ private:
 template <typename T>
 list <T> ::list(size_t num, const T & t) 
 {
+    // Fill constructor
+    /*IF (num)
+          pHead <- pPrevious <- pNew <- NEW Node(T)
+          pHead.pPrev <- NULL
+          FOR i <-1 … num-1
+            pNew <- NEW Node(T)
+            pNew.pPrev <- pPrev
+            pNew.pPrev.pNext <- pNew
+            pPrevious <- pNew
+
+          pNew.pNext <- NULL
+          pTail <- pNew
+          numElements <- num*/
    numElements = 99;
    pHead = pTail = new list <T> ::Node();
 }
@@ -345,6 +358,30 @@ list <T> & list <T> :: operator = (list <T> & rhs)
 template <typename T>
 list <T>& list <T> :: operator = (const std::initializer_list<T>& rhs)
 {
+    /*list.copy-assignment(rhs)
+         itRHS <- rhs.begin() Fill existing nodes
+         itLHS <- begin()
+         WHILE itRHS != rhs.end() AND itLHS != end()
+         *itLHS <- *itRHS
+         ++itRHS
+         ++itLHS
+         IF itRHS != rhs.end() Add new nodes
+         WHILE itRHS != rhs.end()
+         push_back(*itRHS)
+         ++itRHS
+         ELSE IF rhs.empty()
+         clear()
+         ELSE IF it LHS != end() Remove the extra nodes
+         p <- itLHS.p
+         pTail <- p.pPrev
+         pNext <- p.pNext
+         WHILE p != NULL
+         pNext <- p.pNext
+         DELETE p
+         p <- pNext
+         numElements--
+         pTail.pNext <- NULL
+        */
    return *this;
 }
 
@@ -358,7 +395,17 @@ list <T>& list <T> :: operator = (const std::initializer_list<T>& rhs)
 template <typename T>
 void list <T> :: clear()
 {
-
+    //if (numElements > 0) {
+    //    while (pHead != nullptr)
+    //    {
+    //        Node* pDelete = pHead;
+    //        pHead = pHead->pNext;
+    //        delete pDelete;
+    //    }
+    //}
+    //// Set list default values
+    //pHead = pTail = NULL;
+    //numElements = 0;
 }
 
 /*********************************************
@@ -371,7 +418,7 @@ void list <T> :: clear()
 template <typename T>
 void list <T> :: push_back(const T & data)
 {
-
+    
 }
 
 template <typename T>
