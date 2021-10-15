@@ -15,7 +15,7 @@
  *        List         : A class that represents a List
  *        ListIterator : An iterator through List
  * Author
- *    Alexander Dohms, Stephen Costigan, Shaun Crook
+ *    Alexander Dohms, Stephen Costigan, Shaun Crook, Jonathan Colwell
  ************************************************************************/
 
 #pragma once
