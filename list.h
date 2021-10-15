@@ -699,7 +699,6 @@ T & list <T> :: front()
     if (numElements == empty)
         return *(new T);
     return pHead->data; 
-    //return *(new T);
 }
 
 /*********************************************
@@ -716,7 +715,6 @@ T & list <T> :: back()
     if (numElements == empty)
         return *(new T);
     return pTail->data;
-    //return *(new T);
 }
 
 /******************************************
