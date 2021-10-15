@@ -262,6 +262,8 @@ list <T> ::list(size_t num, const T & t)
     //    
     //    pHead = pNew;*/
     //}
+    numElements = 99;
+    pHead = pTail = new list <T> ::Node();
 }
 
 /*****************************************
@@ -282,6 +284,8 @@ list <T> ::list(Iterator first, Iterator last)
         numElements++;
         it++;
     }*/
+    numElements = 99;
+       pHead = pTail = new list <T> ::Node();
 }
 
 /*****************************************
@@ -332,6 +336,8 @@ list <T> ::list(const std::initializer_list<T>& il)
     //    }
     //    //pHead = pNew;
     //}
+    numElements = 99;
+       pHead = pTail = new list <T> ::Node();
 }
 
 /*****************************************
@@ -350,6 +356,8 @@ list <T> ::list(size_t num)
     else {
         pHead = pTail = new list <T> ::Node();
     }*/
+    numElements = 99;
+       pHead = pTail = new list <T> ::Node();
 }
 
 /*****************************************
@@ -361,6 +369,8 @@ list <T> ::list()
     // Doesn't contribute to %, but it matches the book so idk
     /*numElements = 0;
     pHead = pTail = nullptr;*/
+    numElements = 99;
+       pHead = pTail = new list <T> ::Node();
 }
 
 /*****************************************
@@ -373,6 +383,8 @@ list <T> ::list(list& rhs)
     /*pHead = pTail = nullptr;
     numElements = 0;
     *this = rhs;*/
+    numElements = 99;
+       pHead = pTail = new list <T> ::Node();
 }
 
 /*****************************************
