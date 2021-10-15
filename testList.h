@@ -44,7 +44,7 @@ public:
       test_destructor_standard();
 
       // Assign
-      /*test_assign_emptyToEmpty();
+      test_assign_emptyToEmpty();
       test_assign_standardToEmpty();
       test_assign_emptyToStandard();
       test_assign_smallToBig();
@@ -104,7 +104,7 @@ public:
       test_size_three();
       test_empty_empty();
       test_empty_three();
-      */
+      
       report("List");
    }
 
