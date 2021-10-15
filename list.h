@@ -414,7 +414,6 @@ list <T>& list <T> :: operator = (list <T>& rhs)
         }
     }
 
-
     numElements = rhs.numElements;
     rhs.pHead = pTail = NULL;
     rhs.numElements = 0;
