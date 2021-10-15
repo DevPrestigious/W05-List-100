@@ -256,10 +256,16 @@ list <T> ::list(size_t num, const T & t)
  ****************************************/
 template <typename T>
 template <class Iterator>
-list <T> ::list(Iterator first, Iterator last)
+list <T> ::list(Iterator first, Iterator last) // [ x, y, z ]
 {
-   numElements = 99;
-   pHead = pTail = new list <T> ::Node();
+    pHead = pTail = nullptr;
+
+    list*<T>::iterator it = first;
+    while (it != last)
+       {
+           push_back(*it);
+           numElements++;
+       }
 }
 
 /*****************************************
@@ -269,8 +275,13 @@ list <T> ::list(Iterator first, Iterator last)
 template <typename T>
 list <T> ::list(const std::initializer_list<T>& il)
 {
-   numElements = 99;
-   pHead = pTail = new list <T> ::Node();
+    pHead = pTail = nullptr;
+    numElements = il.size();
+    pHead = pTail = new list <T> ::Node();
+    for (T const item : il)
+       {
+           push_back(item);
+       }
 }
 
 /*****************************************
