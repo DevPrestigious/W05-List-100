@@ -343,6 +343,8 @@ list <T> ::list(const std::initializer_list<T>& il)
 template <typename T>
 list <T> ::list(size_t num)
 {
+    // THIS IS LIKELY THE SAME AS THE FILL CONSTRUCTOR, BUT WITH NULL VALUES. 
+    // When we get that figured out, let's just copy it here.
     /*numElements = num;
     if (num == 0) {
         pHead = pTail = nullptr;
@@ -432,7 +434,26 @@ list <T>& list <T> :: operator = (list <T> && rhs)
 template <typename T>
 list <T> & list <T> :: operator = (list <T> & rhs)
 {
-   return *this;
+    clear();
+
+    for (int i = 0; i < numElements; i++) {
+        if (i == 0) {
+            pHead = rhs.pHead;
+        }
+        else {
+            pHead = pHead->pNext;
+            rhs.pHead = rhs.pHead->pNext;
+            pHead[i] = rhs.pHead[i];
+        }
+    }
+
+
+    numElements = rhs.numElements;
+    rhs.pHead = pTail = NULL;
+    rhs.numElements = 0;
+
+    return *this;
+   /*return *this;*/
 }
 
 /**********************************************
@@ -646,6 +667,7 @@ void list <T> ::push_front(T && data)
 template <typename T>
 void list <T> ::pop_back()
 {
+    // This hurts our %
    /*if (!empty())
     {
         if (numElements == 1 || numElements == NULL) {
