@@ -15,7 +15,7 @@
  *        List         : A class that represents a List
  *        ListIterator : An iterator through List
  * Author
- *    Alexander Dohms, Stephen Costigan, Shaun Crook//test
+ *    Alexander Dohms, Stephen Costigan, Shaun Crook
  ************************************************************************/
 
 #pragma once
@@ -34,8 +34,8 @@ namespace custom
 template <typename T>
 class list
 {
-public:  
-   // 
+public:
+   //
    // Construct
    //
 
@@ -47,11 +47,11 @@ public:
    list(const std::initializer_list<T>& il);
    template <class Iterator>
    list(Iterator first, Iterator last);
-  ~list() 
+  ~list()
    {
    }
 
-   // 
+   //
    // Assign
    //
 
@@ -84,7 +84,7 @@ public:
    void push_back (const T&  data);
    void push_back (      T&& data);
    iterator insert(iterator it, const T& data);
-   iterator insert(iterator it, T&& data); 
+   iterator insert(iterator it, T&& data);
 
    //
    // Remove
@@ -95,7 +95,7 @@ public:
    void clear();
    iterator erase(const iterator& it);
 
-   // 
+   //
    // Status
    //
 
@@ -131,15 +131,15 @@ public:
    //
    // Construct
    //
-   Node()  
+   Node()
    {
       pNext = pPrev = this;
    }
-   Node(const T &  data)  
+   Node(const T &  data)
    {
       pNext = pPrev = this;
    }
-   Node(      T && data)  
+   Node(      T && data)
    {
       pNext = pPrev = this;
    }
@@ -204,7 +204,7 @@ public:
         return i;
     }
 
-    // prefix decrement 
+    // prefix decrement
     iterator& operator -- ()
     {
         if (p > 0)
@@ -231,7 +231,7 @@ private:
  * Create a list initialized to a value
  ****************************************/
 template <typename T>
-list <T> ::list(size_t num, const T & t) 
+list <T> ::list(size_t num, const T & t)
 {
     // Fill constructor
     /*IF (num)
@@ -245,34 +245,9 @@ list <T> ::list(size_t num, const T & t)
 
           pNew.pNext <- NULL
           pTail <- pNew
-          numElements <- num
-          */
-    
-    
-    if (num)
-    {
-        Node* pHead = new Node(t);
-        Node* pPrevious = new Node(t);
-        Node* pNew = new Node(t);
-        pHead->pPrev = nullptr;
-
-        for (int i = 1; i == num - 1; i++)
-        {
-            pNew = new Node(t);
-            pNew->pPrev = pHead->pPrev;
-            
-            pNew->pPrev->pNext = pNew;
-            pPrevious = pNew;
-
-            
-        }
-        pNew->pNext = nullptr;
-        pTail = pNew;
-        numElements = num;
-    }
-    
-   //numElements = 99;
-   //pHead = pTail = new list <T> ::Node();
+          numElements <- num*/
+   numElements = 99;
+   pHead = pTail = new list <T> ::Node();
 }
 
 /*****************************************
@@ -281,13 +256,13 @@ list <T> ::list(size_t num, const T & t)
  ****************************************/
 template <typename T>
 template <class Iterator>
-list <T> ::list(Iterator first, Iterator last) 
+list <T> ::list(Iterator first, Iterator last)
 {
     pHead = pTail = nullptr;
     numElements = 0;
     auto it = first;
 
-    while (it != last) 
+    while (it != last)
     {
         push_back(*it);
         numElements++;
@@ -305,34 +280,28 @@ list <T> ::list(const std::initializer_list<T>& il)
     pHead = pTail = nullptr;
     numElements = il.size();
     pHead = pTail = new list <T> ::Node();
-    int i = 0;
     for (T const item : il)
     {
-        push_back(item); 
+        push_back(item);
     }
 }
 
 /*****************************************
- * LIST :: NON-DEFAULT constructors - Finished | Steve
+ * LIST :: NON-DEFAULT constructors
  * Create a list initialized to a value
  ****************************************/
 template <typename T>
 list <T> ::list(size_t num)
 {
-   numElements = num;
-   if (num == 0) {
-       pHead = pTail = nullptr;
-   }
-   else {
-       pHead = pTail = new list <T> ::Node();
-   }
+   numElements = 99;
+   pHead = pTail = new list <T> ::Node();
 }
 
 /*****************************************
  * LIST :: DEFAULT constructors - Finished | Alexander
  ****************************************/
 template <typename T>
-list <T> ::list() 
+list <T> ::list()
 {
     numElements = 0;
     pHead = pTail = nullptr;
@@ -342,11 +311,11 @@ list <T> ::list()
  * LIST :: COPY constructors - Finished | Alexander
  ****************************************/
 template <typename T>
-list <T> ::list(list& rhs) 
+list <T> ::list(list& rhs)
 {
     pHead = pTail = nullptr;
     numElements = 0;
-    std::move(rhs);
+    *this = rhs;
 }
 
 /*****************************************
@@ -370,7 +339,7 @@ list <T> ::list(list <T>&& rhs)
  * Copy one list onto another
  *     INPUT  : a list to be moved
  *     OUTPUT :
- *     COST   : O(n) with respect to the size of the LHS 
+ *     COST   : O(n) with respect to the size of the LHS
  *********************************************/
 template <typename T>
 list <T>& list <T> :: operator = (list <T> && rhs)
@@ -496,12 +465,12 @@ void list <T> :: push_front(const T & data)
         pTail  pNew …the tail is also the head
         pHead  pNew
         numElements++*/
-    Node* pNew = new Node(data);    
+    Node* pNew = new Node(data);
     pNew->pNext = pHead;
     if (pHead)
         pHead->pPrev = pNew;
     else
-        pTail = pNew;
+        //pTail = pNew;
         pHead = pNew;
         numElements++;
 }
@@ -516,7 +485,7 @@ void list <T> ::push_front(T && data)
 /*********************************************
  * LIST :: POP BACK
  * remove an item from the end of the list
- *    INPUT  : 
+ *    INPUT  :
  *    OUTPUT :
  *    COST   : O(1)
  *********************************************/
@@ -542,34 +511,34 @@ void list <T> ::pop_front()
 /*********************************************
  * LIST :: FRONT
  * retrieves the first element in the list
- *     INPUT  : 
+ *     INPUT  :
  *     OUTPUT : data to be displayed
  *     COST   : O(1)
  *********************************************/
 template <typename T>
 T & list <T> :: front()
 {
-    return pHead->data; // Added by steve, seems to work fine
+   return *(new T);
 }
 
 /*********************************************
  * LIST :: BACK
  * retrieves the last element in the list
- *     INPUT  : 
+ *     INPUT  :
  *     OUTPUT : data to be displayed
  *     COST   : O(1)
  *********************************************/
 template <typename T>
 T & list <T> :: back()
 {
-    return pTail->data; // Added by steve, seems to work fine
+   return *(new T);
 }
 
 /******************************************
  * LIST :: REMOVE
  * remove an item from the middle of the list
  *     INPUT  : an iterator to the item being removed
- *     OUTPUT : iterator to the new location 
+ *     OUTPUT : iterator to the new location
  *     COST   : O(1)
  ******************************************/
 template <typename T>
@@ -588,7 +557,7 @@ typename list <T> :: iterator  list <T> :: erase(const list <T> :: iterator & it
  ******************************************/
 template <typename T>
 typename list <T> :: iterator list <T> :: insert(list <T> :: iterator it,
-                                                 const T & data) 
+                                                 const T & data)
 {
    return end();
 }
