@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * Header:
  *    LIST
  * Summary:
@@ -237,7 +237,7 @@ list <T> ::list(size_t num, const T & t)
     /*IF (num)
           pHead <- pPrevious <- pNew <- NEW Node(T)
           pHead.pPrev <- NULL
-          FOR i <-1 � num-1
+          FOR i <-1 … num-1
             pNew <- NEW Node(T)
             pNew.pPrev <- pPrev
             pNew.pPrev.pNext <- pNew
@@ -457,7 +457,22 @@ void list <T> ::push_back(T && data)
 template <typename T>
 void list <T> :: push_front(const T & data)
 {
-
+    /*pNew  new Node(t) Create a new node
+        pNew.pNext  pHead
+        IF pHead
+        pHead.pPrev  pNew The old head must be updated or…
+        ELSE
+        pTail  pNew …the tail is also the head
+        pHead  pNew
+        numElements++*/
+    Node* pNew = new Node(data);    
+    pNew->pNext = pHead;
+    if (pHead)
+        pHead->pPrev = pNew;
+    else
+        //pTail = pNew;
+        pHead = pNew;
+        numElements++;
 }
 
 template <typename T>
