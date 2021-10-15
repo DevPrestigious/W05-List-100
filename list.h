@@ -366,7 +366,7 @@ list <T> ::list()
 }
 
 /*****************************************
- * LIST :: COPY constructors - Finished | Alexander
+ * LIST :: COPY constructors - Alexander
  ****************************************/
 template <typename T>
 list <T> ::list(list& rhs)
@@ -394,7 +394,7 @@ list <T> ::list(list <T>&& rhs)
 }
 
 /**********************************************
- * LIST :: assignment operator
+ * LIST :: assignment operator - Finished
  * Copy one list onto another
  *     INPUT  : a list to be copied
  *     OUTPUT :
@@ -422,7 +422,6 @@ list <T>& list <T> :: operator = (list <T>& rhs)
     rhs.numElements = 0;
 
     return *this;
-    /*return *this;*/
 }
 
 /**********************************************
@@ -532,7 +531,7 @@ list <T>& list <T> :: operator = (const std::initializer_list<T>& rhs)
 }
 
 /**********************************************
- * LIST :: CLEAR
+ * LIST :: CLEAR - Finished
  * Remove all the items currently in the linked list
  *     INPUT  :
  *     OUTPUT :
@@ -541,22 +540,12 @@ list <T>& list <T> :: operator = (const std::initializer_list<T>& rhs)
 template <typename T>
 void list <T> :: clear()
 {
-
-    /*if (numElements > 0) {
-        while (pHead != nullptr)
-        {
-            Node* pDelete = pHead;
-            pHead = pHead->pNext;
-            delete pDelete;
-        }
-    }*/
-    // Set list default values
     pHead = pTail = nullptr;
     numElements = 0;
 }
 
 /*********************************************
- * LIST :: PUSH BACK
+ * LIST :: PUSH BACK - Finished (check the other one below for the error)
  * add an item to the end of the list
  *    INPUT  : data to be added to the list
  *    OUTPUT :
@@ -583,7 +572,7 @@ void list <T> :: push_back(const T & data)
 }
 
 template <typename T>
-void list <T> ::push_back(T && data)
+void list <T> ::push_back(T && data) // THIS IS THE ONE THAT NEEDS FIXING (THE CONTENT OF THE ELSE STATEMENT)
 {
     Node* pNew = new Node(data);
 
@@ -591,19 +580,17 @@ void list <T> ::push_back(T && data)
     {
         pHead = pNew;
         pTail = pNew;
-        numElements++;
     }
     else
     {
-        //pTail->pNext = pNew;
-        //pNew->pPrev = pTail;
-        pTail = pNew;
+        /*pTail = std::move(pNew);*/
     }
+    numElements++;
 
 }
 
 /*********************************************
- * LIST :: PUSH FRONT
+ * LIST :: PUSH FRONT - Finished
  * add an item to the head of the list
  *     INPUT  : data to be added to the list
  *     OUTPUT :
@@ -612,22 +599,6 @@ void list <T> ::push_back(T && data)
 template <typename T>
 void list <T> :: push_front(const T & data)
 {
-    /*pNew  new Node(t) Create a new node
-        pNew.pNext  pHead
-        IF pHead
-        pHead.pPrev  pNew The old head must be updated or…
-        ELSE
-        pTail  pNew …the tail is also the head
-        pHead  pNew
-        numElements++*/
-    //Node* pNew = new Node(data);
-    //pNew->pNext = pHead;
-    //if (pHead)
-    //    pHead->pPrev = pNew;
-    //else
-    //    //pTail = pNew;
-    //    pHead = pNew;
-    //    numElements++;
     Node* pNew = new Node(data);
     if (pNew != nullptr) {
         if (numElements == 0)
@@ -712,7 +683,7 @@ void list <T> ::pop_front()
 }
 
 /*********************************************
- * LIST :: FRONT
+ * LIST :: FRONT - Finished
  * retrieves the first element in the list
  *     INPUT  :
  *     OUTPUT : data to be displayed
@@ -729,7 +700,7 @@ T & list <T> :: front()
 }
 
 /*********************************************
- * LIST :: BACK
+ * LIST :: BACK - Finished
  * retrieves the last element in the list
  *     INPUT  :
  *     OUTPUT : data to be displayed
