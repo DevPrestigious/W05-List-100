@@ -246,8 +246,27 @@ list <T> ::list(size_t num, const T & t)
           pNew.pNext <- NULL
           pTail <- pNew
           numElements <- num*/
-   numElements = 99;
-   pHead = pTail = new list <T> ::Node();
+    if (num)
+    {
+        Node* pHead = new Node(t);
+        Node* pPrevious = new Node(t);
+        Node* pNew = new Node(t);
+        pHead->pPrev = nullptr;
+
+        for (int i = 1; i == num - 1; i++)
+        {
+            pNew = new Node(t);
+            pNew->pPrev = pHead->pPrev;
+
+            pNew->pPrev->pNext = pNew;
+            pPrevious = pNew;
+
+
+        }
+        pNew->pNext = nullptr;
+        pTail = pNew;
+        numElements = num;
+    }
 }
 
 /*****************************************
@@ -293,8 +312,13 @@ list <T> ::list(const std::initializer_list<T>& il)
 template <typename T>
 list <T> ::list(size_t num)
 {
-   numElements = 99;
-   pHead = pTail = new list <T> ::Node();
+    numElements = num;
+    if (num == 0) {
+        pHead = pTail = nullptr;
+    }
+    else {
+        pHead = pTail = new list <T> ::Node();
+    }
 }
 
 /*****************************************
