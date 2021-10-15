@@ -96,10 +96,10 @@ public:
    iterator erase(const iterator& it);
 
    //
-   // Status
+   // Status - Finished
    //
 
-   bool empty()  const { return numElements; }
+   bool empty()  const { return size() == 0; }
    size_t size() const { return numElements > 0 ? numElements : 0; }
 
 
@@ -118,7 +118,7 @@ private:
 };
 
 /*************************************************
- * NODE
+ * NODE - Finished
  * the node class.  Since we do not validate any
  * of the setters, there is no point in making them
  * private.  This is the case because only the
@@ -145,7 +145,7 @@ public:
 };
 
 /*************************************************
- * LIST ITERATOR
+ * LIST ITERATOR - Finished
  * Iterate through a List, non-constant version
  ************************************************/
 template <typename T>
@@ -378,7 +378,7 @@ list <T> ::list(list& rhs)
 }
 
 /*****************************************
- * LIST :: MOVE constructors - Finished | Alexander
+ * LIST :: MOVE constructors - Finished
  * Steal the values from the RHS
  ****************************************/
 template <typename T>
