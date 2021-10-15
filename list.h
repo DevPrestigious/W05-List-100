@@ -288,7 +288,7 @@ list <T> ::list(const std::initializer_list<T>& il)
 }
 
 /*****************************************
- * LIST :: NON-DEFAULT constructors
+ * LIST :: NON-DEFAULT constructors - Finished | Steve
  * Create a list initialized to a value
  ****************************************/
 template <typename T>
