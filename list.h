@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * Header:
  *    LIST
  * Summary:
@@ -15,7 +15,7 @@
  *        List         : A class that represents a List
  *        ListIterator : An iterator through List
  * Author
- *    Alexander Dohms, Stephen Costigan, Shaun Crook
+ *    Alexander Dohms, Stephen Costigan, Shaun Crook//test
  ************************************************************************/
 
 #pragma once
@@ -321,7 +321,7 @@ list <T> ::list(list& rhs)
 {
     pHead = pTail = nullptr;
     numElements = 0;
-    *this = rhs;
+    std::move(rhs);
 }
 
 /*****************************************
