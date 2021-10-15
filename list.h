@@ -305,21 +305,27 @@ list <T> ::list(const std::initializer_list<T>& il)
     pHead = pTail = nullptr;
     numElements = il.size();
     pHead = pTail = new list <T> ::Node();
+    int i = 0;
     for (T const item : il)
     {
-        push_back(item);
+        push_back(item); 
     }
 }
 
 /*****************************************
- * LIST :: NON-DEFAULT constructors
+ * LIST :: NON-DEFAULT constructors - Finished | Steve
  * Create a list initialized to a value
  ****************************************/
 template <typename T>
 list <T> ::list(size_t num)
 {
-   numElements = 99;
-   pHead = pTail = new list <T> ::Node();
+   numElements = num;
+   if (num == 0) {
+       pHead = pTail = nullptr;
+   }
+   else {
+       pHead = pTail = new list <T> ::Node();
+   }
 }
 
 /*****************************************
@@ -543,7 +549,7 @@ void list <T> ::pop_front()
 template <typename T>
 T & list <T> :: front()
 {
-   return *(new T);
+    return pHead->data; // Added by steve, seems to work fine
 }
 
 /*********************************************
@@ -556,7 +562,7 @@ T & list <T> :: front()
 template <typename T>
 T & list <T> :: back()
 {
-   return *(new T);
+    return pTail->data; // Added by steve, seems to work fine
 }
 
 /******************************************
