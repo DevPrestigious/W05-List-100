@@ -395,6 +395,7 @@ list <T>& list <T> :: operator = (const std::initializer_list<T>& rhs)
 template <typename T>
 void list <T> :: clear()
 {
+
     //if (numElements > 0) {
     //    while (pHead != nullptr)
     //    {
@@ -406,6 +407,12 @@ void list <T> :: clear()
     //// Set list default values
     //pHead = pTail = NULL;
     //numElements = 0;
+
+        
+        // Set list default values
+        pHead = pTail = nullptr;
+        numElements = 0;
+
 }
 
 /*********************************************
