@@ -263,7 +263,7 @@ list <T> ::list(size_t num, const T & t)
     //    pHead = pNew;*/
     //}
     numElements = num;
-    pHead = pTail = new list <T> ::Node(t);
+    pHead = pTail = new Node(t);
     /*numElements = 99;
     pHead = pTail = new list <T> ::Node();*/
 }
@@ -304,7 +304,7 @@ list <T> ::list(const std::initializer_list<T>& il)
         push_back(item);
     }*/
     numElements = 0;
-    pHead = pTail = new Node();
+    pHead = pTail = new list <T> ::Node();
     
     if (il.size() > 0)
     {
@@ -350,9 +350,9 @@ template <typename T>
 list <T> ::list(size_t num)
 {
     numElements = num;
-       pHead = pTail = nullptr;
-       /*numElements = 99;
-       pHead = pTail = new list <T> ::Node();*/
+    pHead = pTail = nullptr;
+    /*numElements = 99;
+    pHead = pTail = new list <T> ::Node();*/
 }
 
 /*****************************************
@@ -449,10 +449,19 @@ list <T>& list <T> :: operator = (list <T> && rhs)
         }
     }*/
 
+    /*pHead = std::move(rhs.pHead);
+    pTail = std::move(rhs.pTail);
 
-    /*numElements = rhs.numElements;
+    list<T>::iterator it = rhs->begin();
+    Node* rhsEl = rhs.pHead;
+    while (rhsEl != rhs->end()) {
+        insert(*it, rhsEl->data);
+        rhsEl = rhsEl->pNext;
+    }*/
+
+    numElements = rhs.numElements;
     rhs.pHead = pTail = NULL;
-    rhs.numElements = 0;*/
+    rhs.numElements = 0;
 
     return *this;
 }
@@ -658,7 +667,6 @@ void list <T> ::pop_back()
         }
         numElements--;
    }
-   // line:1029 condition:l.pHead->pNext->pNext->pNext == nullptr only error left
 }
 
 /*********************************************
@@ -702,7 +710,6 @@ void list <T> ::pop_front()
         }
         numElements > 0 ? numElements-- : 0;
     }
-    // line:1073 condition:l.pHead->pPrev == nullptr only error
 }
 
 /*********************************************
@@ -747,7 +754,7 @@ T & list <T> :: back()
 template <typename T>
 typename list <T> :: iterator  list <T> :: erase(const list <T> :: iterator & it)
 {
-    /*if (it.p != NULL)
+    if (it.p != nullptr)
     {
         if (it.p->pPrev)
         {
@@ -755,8 +762,8 @@ typename list <T> :: iterator  list <T> :: erase(const list <T> :: iterator & it
         }
         else
         {
+            pHead->pPrev = nullptr;
             pHead = it.p->pNext;
-            pHead->pPrev = NULL;
         }
 
         if (it.p->pNext)
@@ -765,12 +772,12 @@ typename list <T> :: iterator  list <T> :: erase(const list <T> :: iterator & it
         }
         else
         {
+            pTail->pNext = nullptr;
             pTail = it.p->pPrev;
-            pTail->pNext = NULL;
         }
-        delete it.p;
+
         numElements--;
-    }*/
+    }
     return it.p;
 }
 
