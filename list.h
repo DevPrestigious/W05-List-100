@@ -262,8 +262,10 @@ list <T> ::list(size_t num, const T & t)
     //    
     //    pHead = pNew;*/
     //}
-    numElements = 99;
-    pHead = pTail = new list <T> ::Node();
+    numElements = num;
+    pHead = pTail = new list <T> ::Node(t);
+    /*numElements = 99;
+    pHead = pTail = new list <T> ::Node();*/
 }
 
 /*****************************************
@@ -274,8 +276,7 @@ template <typename T>
 template <class Iterator>
 list <T> ::list(Iterator first, Iterator last)
 {
-    // THIS DOES NOT INCREASE %
-    /*pHead = pTail = nullptr;
+    pHead = pTail = nullptr;
     numElements = 0;
     auto it = first;
     while (it != last)
@@ -283,9 +284,9 @@ list <T> ::list(Iterator first, Iterator last)
         push_back(*it);
         numElements++;
         it++;
-    }*/
-    numElements = 99;
-       pHead = pTail = new list <T> ::Node();
+    }
+    /*numElements = 99;
+       pHead = pTail = new list <T> ::Node();*/
 }
 
 /*****************************************
@@ -302,42 +303,43 @@ list <T> ::list(const std::initializer_list<T>& il)
     {
         push_back(item);
     }*/
-    //numElements = 0;
-    //pHead = pTail = new Node();
-    //
-    //if (il.size() > 0)
-    //{
-    //    //Node* pNew = pHead;
-    //    //list<T>::iterator it = new iterator(il);
-    //    for (T const item : il)
-    //    {
-    //        /*insert(it, item);
-    //        it++;*/
-    //        push_back(item);
-    //        /*pNew = new Node (item);
-    //        pNew->pNext = pCurrent->pNext;
-    //        pNew->pPrev = pCurrent;
-    //        pCurrent->pNext = pNew;
-    //        if (pNew->pNext)
-    //            pNew->pNext->pPrev = pNew;
-    //        pCurrent = pCurrent->pNext;*/
-    //        /*pNew->data = item;
-    //        pNew->pNext = nullptr;
-    //        if (pHead == nullptr) { 
-    //            pHead = pTail = pNew;
-    //            pHead->pPrev = pNew->pPrev;
-    //            pHead->pNext = pTail;
-    //        }
-    //        else {
-    //            pTail->pNext = pNew;
-    //            pTail->pPrev = pNew->pPrev;
-    //            pTail = pNew;
-    //        }*/
-    //    }
-    //    //pHead = pNew;
-    //}
-    numElements = 99;
-       pHead = pTail = new list <T> ::Node();
+    numElements = 0;
+    pHead = pTail = new Node();
+    
+    if (il.size() > 0)
+    {
+        //Node* pNew = pHead;
+        //list<T>::iterator it = new iterator(il);
+        for (T const item : il)
+        {
+            /*insert(it, item);
+            it++;*/
+            push_back(item);
+            /*pNew = new Node (item);
+            pNew->pNext = pCurrent->pNext;
+            pNew->pPrev = pCurrent;
+            pCurrent->pNext = pNew;
+            if (pNew->pNext)
+                pNew->pNext->pPrev = pNew;
+            pCurrent = pCurrent->pNext;*/
+            /*pNew->data = item;
+            pNew->pNext = nullptr;
+            if (pHead == nullptr) { 
+                pHead = pTail = pNew;
+                pHead->pPrev = pNew->pPrev;
+                pHead->pNext = pTail;
+            }
+            else {
+                pTail->pNext = pNew;
+                pTail->pPrev = pNew->pPrev;
+                pTail = pNew;
+            }*/
+        }
+        //pHead = pNew;
+    }
+
+    /*numElements = 99;
+       pHead = pTail = new list <T> ::Node();*/
 }
 
 /*****************************************
@@ -347,17 +349,10 @@ list <T> ::list(const std::initializer_list<T>& il)
 template <typename T>
 list <T> ::list(size_t num)
 {
-    // THIS IS LIKELY THE SAME AS THE FILL CONSTRUCTOR, BUT WITH NULL VALUES. 
-    // When we get that figured out, let's just copy it here.
-    /*numElements = num;
-    if (num == 0) {
-        pHead = pTail = nullptr;
-    }
-    else {
-        pHead = pTail = new list <T> ::Node();
-    }*/
     numElements = num;
-       pHead = pTail = new list <T> ::Node();
+       pHead = pTail = nullptr;
+       /*numElements = 99;
+       pHead = pTail = new list <T> ::Node();*/
 }
 
 /*****************************************
@@ -378,12 +373,11 @@ list <T> ::list()
 template <typename T>
 list <T> ::list(list& rhs)
 {
-    // Doesn't contribute to %, but it matches the book so idk
-    /*pHead = pTail = nullptr;
-    numElements = 0;
-    *this = rhs;*/
-    numElements = 99;
-       pHead = pTail = new list <T> ::Node();
+    pHead = pTail = nullptr;
+    numElements = rhs.numElements;
+    *this = rhs;
+    /*numElements = 99;
+       pHead = pTail = new list <T> ::Node();*/
 }
 
 /*****************************************
