@@ -137,7 +137,7 @@ namespace custom
        // Data
        //
 
-        T data;                 // user data
+        T data;                 // user data 
         Node* pNext;       // pointer to next node
         Node* pPrev;       // pointer to previous node
     };
@@ -176,7 +176,7 @@ namespace custom
                 p = p->pNext;
                 return p;
             }
-            p == nullptr;
+            p = nullptr;
             return p;
         }
 
@@ -188,7 +188,7 @@ namespace custom
                 p = p->pNext;
                 return it;
             }
-            p == nullptr;
+            p = nullptr;
             return *this;
         }
 
@@ -199,7 +199,7 @@ namespace custom
                 p = p->pPrev;
                 return p;
             }
-            p == nullptr;
+            p = nullptr;
             return p;
         }
 
@@ -284,7 +284,6 @@ namespace custom
         while (it != last)
         {
             push_back(*it);
-            numElements++;
             it++;
         }
         /*numElements = 99;
@@ -319,8 +318,22 @@ namespace custom
     template <typename T>
     list <T> ::list(size_t num)
     {
+        /*numElements = num;
+        pHead = pTail = nullptr;*/
+        if (num) {
+            Node* pPrevious = pHead = pTail = new Node(T(0));
+            pHead->pPrev = nullptr;
+
+            for (int i = 1; i < num; i++) {
+                Node* pNew = new Node(T(0));
+                pNew->pPrev = pPrevious;
+                pNew->pPrev->pNext = pNew;
+                pPrevious = pNew;
+            }
+            pPrevious->pNext = nullptr;
+            pTail = pPrevious;
+        }
         numElements = num;
-        pHead = pTail = nullptr;
         /*numElements = 99;
         pHead = pTail = new list <T> ::Node();*/
     }
@@ -344,7 +357,7 @@ namespace custom
     list <T> ::list(list& rhs)
     {
         pHead = pTail = nullptr;
-        numElements = rhs.numElements;
+        numElements = 0;
         *this = rhs;
         /*numElements = 99;
            pHead = pTail = new list <T> ::Node();*/
@@ -562,6 +575,8 @@ namespace custom
             pTail->pNext = pNew;
         else
             pHead = pNew;
+
+        pTail = pNew;
         numElements++;
     }
 
@@ -574,6 +589,8 @@ namespace custom
             pTail->pNext = pNew;
         else
             pHead = pNew;
+
+        pTail = pNew;
         numElements++;
 
     }
@@ -738,40 +755,33 @@ namespace custom
     template <typename T>
     typename list <T> ::iterator  list <T> ::erase(const list <T> ::iterator& it)
     {
-        /*
-        TestList::test_erase_standardEnd()
-                    line:1709 condition:itReturn.p == NULL
-                    line:1710 condition:itReturn == l.end()
-            TestList::test_erase_standardFront()
-                    line:1619 condition:itReturn.p == p2
-            TestList::test_erase_standardMiddle()
-                    line:1664 condition:itReturn.p == p3
-        */
+        iterator itNext = end();
         if (it.p != nullptr)
         {
+            if (it.p->pNext)
+            {
+                it.p->pNext->pPrev = it.p->pPrev;
+                itNext = it.p->pNext;
+            }
+            else
+            {
+                /*pTail->pNext = nullptr;*/
+                pTail = it.p->pPrev;
+            }
+
             if (it.p->pPrev)
             {
                 it.p->pPrev->pNext = it.p->pNext;
             }
             else
             {
-                pHead->pPrev = nullptr;
+                /*pHead->pPrev = nullptr;*/
                 pHead = it.p->pNext;
             }
-
-            if (it.p->pNext)
-            {
-                it.p->pNext->pPrev = it.p->pPrev;
-            }
-            else
-            {
-                pTail->pNext = nullptr;
-                pTail = it.p->pPrev;
-            }
-
+            delete it.p;
             numElements--;
         }
-        return it.p;
+        return itNext;
     }
 
     /******************************************
@@ -790,7 +800,9 @@ namespace custom
 
         if (numElements == 0)
         {
+            numElements = 1;
             pHead = pTail = pNew;
+            return begin();
         }
 
         if (it.p)
@@ -825,7 +837,9 @@ namespace custom
 
         if (numElements == 0)
         {
+            numElements = 1;
             pHead = pTail = pNew;
+            return begin();
         }
 
         if (it.p)
