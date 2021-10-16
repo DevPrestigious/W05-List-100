@@ -641,16 +641,17 @@ void list <T> ::push_front(T && data)
 template <typename T>
 void list <T> ::pop_back()
 {
-   /*if (!empty())
+   if (!empty())
    {
-        if (numElements == 1 || numElements == NULL) {
+        if (numElements <= 1 ) {
             pTail = pHead = nullptr;
         }
-        else if (numElements > 1) {
-            pTail->pPrev = pTail;
+        else {
+            pTail = pTail->pPrev;
         }
         numElements--;
-   }*/
+   }
+   // line:1029 condition:l.pHead->pNext->pNext->pNext == nullptr only error left
 }
 
 /*********************************************
@@ -677,16 +678,17 @@ void list <T> ::pop_front()
      DELETE it.p Delete then node
      numElements--
      RETURN itNext*/
-    /*if (!empty())
+    if (!empty())
     {
         if (numElements == 1 || numElements == NULL) {
             pTail = pHead = nullptr;
         }
-        else if (numElements > 1) {
-            pHead->pNext = pHead;
+        else  {
+            pHead = pHead->pNext;
         }
         numElements > 0 ? numElements-- : 0;
-    }*/
+    }
+    // line:1073 condition:l.pHead->pPrev == nullptr only error
 }
 
 /*********************************************
