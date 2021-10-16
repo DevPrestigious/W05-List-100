@@ -647,6 +647,13 @@ void list <T> ::pop_back()
             pTail = pHead = nullptr;
         }
         else {
+            Node* pNew = pHead;
+            
+            while (pNew != nullptr) {
+                if (pNew->pNext == pTail)
+                    pNew->pNext = nullptr;
+                pNew = pNew->pNext;
+            }
             pTail = pTail->pPrev;
         }
         numElements--;
@@ -684,6 +691,13 @@ void list <T> ::pop_front()
             pTail = pHead = nullptr;
         }
         else  {
+            Node* pNew = pTail;
+
+            while (pNew != nullptr) {
+                if (pNew->pPrev == pHead)
+                    pNew->pPrev = nullptr;
+                pNew = pNew->pPrev;
+            }
             pHead = pHead->pNext;
         }
         numElements > 0 ? numElements-- : 0;
