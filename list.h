@@ -47,7 +47,7 @@ public:
    list(const std::initializer_list<T>& il);
    template <class Iterator>
    list(Iterator first, Iterator last);
-   ~list() {}
+   ~list() { clear(); }
 
    //
    // Assign
@@ -590,7 +590,7 @@ void list <T> :: push_back(const T & data)
 }
 
 template <typename T>
-void list <T> ::push_back(T && data) // THIS IS THE ONE THAT NEEDS FIXING (THE CONTENT OF THE ELSE STATEMENT)
+void list <T> ::push_back(T && data)
 {
     Node* pNew = new Node(data);
 
@@ -601,7 +601,9 @@ void list <T> ::push_back(T && data) // THIS IS THE ONE THAT NEEDS FIXING (THE C
     }
     else
     {
-        /*pTail = std::move(pNew);*/
+        pTail->pNext = pNew;
+        pNew->pPrev = pTail;
+        pTail = pNew;
     }
     numElements++;
 
@@ -636,7 +638,20 @@ void list <T> :: push_front(const T & data)
 template <typename T>
 void list <T> ::push_front(T && data)
 {
-
+    Node* pNew = new Node(data);
+    if (pNew != nullptr) {
+        if (numElements == 0)
+        {
+            pHead = pTail = pNew;
+        }
+        else
+        {
+            pHead->pPrev = pNew;
+            pNew->pNext = pHead;
+            pHead = pNew;
+        }
+        numElements++;
+    }
 }
 
 
@@ -754,6 +769,15 @@ T & list <T> :: back()
 template <typename T>
 typename list <T> :: iterator  list <T> :: erase(const list <T> :: iterator & it)
 {
+    /*
+    TestList::test_erase_standardEnd()
+                line:1709 condition:itReturn.p == NULL
+                line:1710 condition:itReturn == l.end()
+        TestList::test_erase_standardFront()
+                line:1619 condition:itReturn.p == p2
+        TestList::test_erase_standardMiddle()
+                line:1664 condition:itReturn.p == p3
+    */
     if (it.p != nullptr)
     {
         if (it.p->pPrev)
@@ -854,18 +878,9 @@ void swap(list <T> & lhs, list <T> & rhs)
          numElements <- tempElements
         */
 
-    // Don't know if this works or not
-    /*T* tempHead = rhs.pHead;
-    rhs.pHead = lhs.pHead;
-    lhs.pHead = tempHead;
-
-    T* tempTail = rhs.pTail;
-    rhs.pTail = lhs.pTail;
-    lhs.pTail = tempTail;
-
-    T* tempElements = rhs.numElements;
-    rhs.numElements = lhs.numElements;
-    lhs.tempElements = tempElements;*/
+    list <T> tempHead = rhs;
+    rhs = lhs;
+    lhs = tempHead;
 } 
 
 
